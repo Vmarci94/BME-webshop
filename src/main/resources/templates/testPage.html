@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Termékeink</title>
+</head>
+<body>
+
+	<h1>4.a: 30-nál nagyobb raktérkészletű termékek</h1>
+
+	<table>
+		<thead>
+			<tr>
+				<th>Név</th>
+				<th>Raktárkészlet</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="termek: ${termekek30Folott}">
+				<td th:text="${termek.nev}"></td>
+				<td th:text="${termek.raktarkeszlet}"></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h1>4.b: Legalább kétszer rendelt termékek</h1>
+
+	<table>
+		<thead>
+			<tr>
+				<th>Név</th>
+				<th>Nettó ár</th>
+				<th>Rendelések száma</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="termek: ${legalabbKetszerRendeltTermekek}">
+				<td th:text="${termek.nev}"></td>
+				<td th:text="${termek.nettoar}"></td>
+				<td th:text="${#lists.size(termek.megrendelestetels)}"></td>
+			</tr>
+		</tbody>
+	</table>
+	
+	
+	<h1>4.c: A legdrágább termék adatai</h1>
+
+	<table>
+		<thead>
+			<tr>
+				<th>Név</th>
+				<th>Nettó ár</th>
+				<th>Raktárkészlet</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="termek: ${legdragabbTermekek}">
+				<td th:text="${termek.nev}"></td>
+				<td th:text="${termek.nettoar}"></td>
+				<td th:text="${termek.raktarkeszlet}"></td>
+			</tr>
+		</tbody>
+	</table>
+
+
+	<h1>5.a: Építő elemek áremelése</h1>
+
+	<form th:action="@{/epitoElemekDragit}" method="post">
+		<input type="submit" value="OK" />
+	</form>
+	
+	<h2>Az építő elemek jelenlegi ára</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Név</th>
+				<th>Nettó ár</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="termek: ${epitoElemek}">
+				<td th:text="${termek.nev}"></td>
+				<td th:text="${termek.nettoar}"></td>
+			</tr>
+		</tbody>
+	</table>
+
+
+	
+	<h1>5.b: Drága termékek átsorolása</h1>
+	<form th:action="@{/dragaTermekbeAtsorol}" method="post">
+		<input type="submit" value="OK" />
+	</form>
+	
+	<h2>A Drága játékok kategória termékei</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Név</th>
+				<th>Nettó ár</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="termek: ${dragaJatekok}">
+				<td th:text="${termek.nev}"></td>
+				<td th:text="${termek.nettoar}"></td>
+			</tr>
+		</tbody>
+	</table>
+	
+	
+	<h1>6: Új fizetési mód létrehozása</h1>
+	<form th:action="@{/ujFizetesiMod}" method="post" th:object="${fizetesmod}">
+	
+		<h3 th:if="${ujId}">Fizetési mód létrejött <span th:text="${ujId}">xy</span> azonosítóval</h3>
+		Név:<input th:field="*{mod}"/>
+		<span th:if="${#fields.hasErrors('mod')}"
+			th:errors="*{mod}">Érvénytelen név</span>
+
+		<br/>
+
+		Határidő:<input th:field="*{hatarido}"/>
+		<span th:if="${#fields.hasErrors('hatarido')}"
+			th:errors="*{hatarido}">Érvénytelen határidő</span>
+			
+		<br/>
+		<input type="submit" value="OK" />
+	</form>
+	
+</body>
+</html>
