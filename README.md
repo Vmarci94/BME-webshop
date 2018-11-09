@@ -1,1 +1,1 @@
-# BME-webshop
+# Adatvezérelt Rendszerek példa
