@@ -82,8 +82,7 @@ public class WebshopController {
 
 	// 4.c feladat
 	private List<Termek> findLegdragabbTermekek() {
-		// TODO
-		return null;
+		return termekRepository.findLegdragabb();
 	}
 
 	// 5.a feladat

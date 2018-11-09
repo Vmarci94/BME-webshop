@@ -1,6 +1,7 @@
 package hu.bme.aut.adatvez.webshop.dao;
 
 import hu.bme.aut.adatvez.webshop.model.Termek;
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -16,7 +17,11 @@ public class TermekRepositoryImpl implements TermekRepositoryCustom {
     @Override
     public List<Termek> findAllThatOrderedAtLeastTwice() {
         return entityManager
-                .createQuery(" select t from Termek t where t.megrendelestetels.size > 2 ", Termek.class)
-                .getResultList();
+                .createQuery(" select t from Termek t where t.megrendelestetels.size >= 2", Termek.class).getResultList();
+    }
+
+    @Override
+    public void epitoElemekPluszTizSzazalek() {
+
     }
 }

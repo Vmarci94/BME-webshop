@@ -18,4 +18,6 @@ public interface TermekRepository extends JpaRepository<Termek, Long>, TermekRep
 
 	List<Termek> findByRaktarkeszletIsGreaterThan(@NotNull BigDecimal raktarkeszlet);
 
+	List<Termek> findLegdragabb();
+
 }
